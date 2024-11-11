@@ -1,0 +1,30 @@
+# React Native Ultimate - Starter Template
+
+Template này được sử dụng cho video hướng dẫn React Native Ultimate (basic) của tác giả Hỏi Dân IT (Eric)
+
+### Môi trường chạy dự án: Node.js v20.14.0
+
+https://nodejs.org/download/release/v20.14.0/
+
+## Về tác giả
+
+Mọi thông tin về Tác giả Hỏi Dân IT, các bạn có thể tìm kiếm tại đây:
+
+Website chính thức: https://orc12.vn/
+
+Youtube “Hỏi Dân IT” : https://www.youtube.com/@orc12
+
+Tiktok “Hỏi Dân IT” : https://www.tiktok.com/@orc12
+
+Fanpage “Hỏi Dân IT” : https://www.facebook.com/askITwithERIC/
+
+Udemy Hỏi Dân IT: https://www.udemy.com/user/eric-7039/
+
+===
+
+Các bước cài đặt: (chế độ development)
+
+1. clone code
+2. cài đặt thư viện: npm i
+3. Update file .env (nếu cần thiết)
+4. Chạy dự án: npm start | hoặc | npm run dev
