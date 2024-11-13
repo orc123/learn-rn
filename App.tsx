@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 export default function App() {
   const [name, setName] = useState<string>("a");
@@ -35,7 +42,7 @@ export default function App() {
 
       <Button title="Add new" onPress={() => alert("Tap me")} />
 
-      <View
+      <ScrollView
         style={{
           marginTop: 20,
           borderColor: "red",
@@ -43,9 +50,13 @@ export default function App() {
         }}
       >
         {todoList.map((todo) => {
-          return <Text style={styles.todo}>{todo.title}</Text>;
+          return (
+            <Text key={todo.id} style={styles.todo}>
+              {todo.title}
+            </Text>
+          );
         })}
-      </View>
+      </ScrollView>
     </View>
   );
 }
