@@ -1,23 +1,25 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function App() {
-  //data-type
-  //string
-  const [name, setName] = useState<string>("hoidanit");
-  //number
-  const [age, setAge] = useState<number>(30);
-  //null, undefined, boolean
-  const test = false;
-  //object, array
-  const [person, setPerson] = useState([6, 9]);
+  const [name, setName] = useState<string>("a");
 
   return (
     <View style={styles.container}>
       <View>
+        <TextInput
+          autoCapitalize="none"
+          //keyboardType="numeric"
+          //maxLength={6}
+          //multiline={true}
+          autoCorrect={false}
+          style={{ borderColor: "violet", borderWidth: 1, padding: 10 }}
+          value={name}
+          onChangeText={(text) => setName(text)}
+        />
         <Text style={styles.text}>{name}</Text>
-        <Text style={styles.text}>{JSON.stringify(person)}</Text>
       </View>
+
       <Text style={styles.text}>
         Hello World
         <Text style={styles.item}> Dong.orc12</Text>
