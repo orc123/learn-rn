@@ -1,18 +1,10 @@
 import { useState } from "react";
-import {
-  Button,
-  FlatList,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { StyleSheet, View } from "react-native";
+import InputTodo from "./components/todo/input.todo";
+import ListTodo from "./components/todo/list.todo";
 
 export default function App() {
-  const [name, setName] = useState<string>("a");
-
-  const [todoList, setTodoList] = useState([
+  const [todoList, setTodoList] = useState<ITodo[]>([
     { id: 1, title: "Learn React Native" },
     { id: 2, title: "Learn React.js" },
     { id: 3, title: "Watching Netflix" },
@@ -27,61 +19,13 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View>
-        <TextInput
-          autoCapitalize="none"
-          //keyboardType="numeric"
-          //maxLength={6}
-          //multiline={true}
-          autoCorrect={false}
-          style={{ borderColor: "violet", borderWidth: 1, padding: 10 }}
-          value={name}
-          onChangeText={(text) => setName(text)}
-        />
-        <Text style={styles.text}>{name}</Text>
-      </View>
-
-      <Button title="Add new" onPress={() => alert("Tap me")} />
-
-      <FlatList
-        style={{
-          marginTop: 20,
-          borderColor: "red",
-          borderWidth: 1,
-        }}
-        data={todoList}
-        keyExtractor={(item) => item.id + ""}
-        renderItem={({ item }) => {
-          return <Text style={styles.todo}>{item.title}</Text>;
-        }}
-      />
-
-      {/* <ScrollView
-        style={{
-          marginTop: 20,
-          borderColor: "red",
-          borderWidth: 1,
-        }}
-      >
-        {todoList.map((todo) => {
-          return (
-            <Text key={todo.id} style={styles.todo}>
-              {todo.title}
-            </Text>
-          );
-        })}
-      </ScrollView> */}
+      <InputTodo />
+      <ListTodo todoList={todoList} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  todo: {
-    fontSize: 30,
-    backgroundColor: "pink",
-    marginBottom: 20,
-    padding: 15,
-  },
   text: {
     fontSize: 30,
     color: "red",
