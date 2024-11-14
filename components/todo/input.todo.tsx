@@ -11,8 +11,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const InputTodo = () => {
+interface IProps {
+  addTodo: (v: string) => void;
+}
+
+const InputTodo = (props: IProps) => {
+  const { addTodo } = props;
   const [name, setName] = useState<string>("");
+  const handleAddNewTodo = () => {
+    addTodo(name);
+  };
   return (
     <>
       <View>
@@ -23,7 +31,7 @@ const InputTodo = () => {
           value={name}
           onChangeText={(text) => setName(text)}
         />
-        <Button title="Add new" onPress={() => alert("Tap me")} />
+        <Button title="Add new" onPress={handleAddNewTodo} />
       </View>
     </>
   );

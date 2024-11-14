@@ -4,32 +4,29 @@ import InputTodo from "./components/todo/input.todo";
 import ListTodo from "./components/todo/list.todo";
 
 export default function App() {
-  const [todoList, setTodoList] = useState<ITodo[]>([
-    { id: 1, title: "Learn React Native" },
-    { id: 2, title: "Learn React.js" },
-    { id: 3, title: "Watching Netflix" },
-    { id: 4, title: "Playing ESport" },
-    { id: 5, title: "Subscribe Dong :v" },
-    { id: 6, title: "Watching Youtube" },
-    { id: 7, title: "CR 7" },
-    { id: 8, title: "Tony Kroos" },
-    { id: 9, title: "Nine" },
-    { id: 10, title: "M10" },
-  ]);
+  const [todoList, setTodoList] = useState<ITodo[]>([]);
+
+  function randomInteger(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  const addTodo = (title: string) => {
+    const todo: ITodo = {
+      id: randomInteger(1, 1000000),
+      title: title,
+    };
+    setTodoList([...todoList, todo]);
+  };
 
   return (
     <View style={styles.container}>
-      <InputTodo />
+      <InputTodo addTodo={addTodo} />
       <ListTodo todoList={todoList} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 30,
-    color: "red",
-  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
@@ -40,8 +37,5 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 20,
     marginTop: 50,
-  },
-  item: {
-    color: "green",
   },
 });
