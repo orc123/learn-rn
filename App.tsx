@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   Button,
+  FlatList,
   ScrollView,
   StyleSheet,
   Text,
@@ -42,7 +43,20 @@ export default function App() {
 
       <Button title="Add new" onPress={() => alert("Tap me")} />
 
-      <ScrollView
+      <FlatList
+        style={{
+          marginTop: 20,
+          borderColor: "red",
+          borderWidth: 1,
+        }}
+        data={todoList}
+        keyExtractor={(item) => item.id + ""}
+        renderItem={({ item }) => {
+          return <Text style={styles.todo}>{item.title}</Text>;
+        }}
+      />
+
+      {/* <ScrollView
         style={{
           marginTop: 20,
           borderColor: "red",
@@ -56,7 +70,7 @@ export default function App() {
             </Text>
           );
         })}
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 }
