@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useRoute } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
 
@@ -21,25 +21,37 @@ function HomeScreen(props: any) {
       <View style={{ marginVertical: 10 }}>
         <Button
           title="Go  user id = 1"
-          onPress={() => navigation.navigate("Details")}
+          onPress={() =>
+            navigation.navigate("Details", {
+              userId: 1,
+              name: "Dong",
+            })
+          }
         />
       </View>
       <View style={{ marginVertical: 10 }}>
         <Button
           title="Go user id = 2"
-          onPress={() => navigation.navigate("Details")}
+          onPress={() =>
+            navigation.navigate("Details", {
+              userId: 2,
+              name: "AAAA",
+            })
+          }
         />
       </View>
     </View>
   );
 }
 
-function DetailsScreen() {
+function DetailsScreen(props: any) {
   const navigation: any = useNavigation();
+  const route: any = useRoute();
+  console.log(route);
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Details Screen</Text>
-      <Text>User id = ???</Text>
+      <Text>User id = {route?.params?.userId}</Text>
       <View style={{ marginVertical: 10 }}>
         <Button title="Go back Home" onPress={() => navigation.goBack()} />
       </View>
