@@ -7,23 +7,38 @@ const styles = StyleSheet.create({
     marginTop: 40,
     borderWidth: 1,
     borderColor: "red",
-    flexDirection: "row",
+
+    flexDirection: "column", //oy
     justifyContent: "center",
+    //alignItems: "center", //ox
+
+    // flexDirection: "row", //ox
+    // justifyContent: "center",
+    // alignItems: "center", //oy
   },
   item1: {
     padding: 20,
     borderWidth: 1,
     backgroundColor: "violet",
+    //height: 250,
+    flex: 4,
+    width: 60,
   },
   item2: {
     padding: 20,
     borderWidth: 1,
     backgroundColor: "green",
+    //height: 300,
+    flex: 1,
+    width: 30,
   },
   item3: {
     padding: 20,
     borderWidth: 1,
     backgroundColor: "orange",
+    //height: 100,
+    flex: 1,
+    width: 100,
   },
   item4: {
     padding: 20,

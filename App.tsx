@@ -30,13 +30,13 @@ export default function App() {
   };
 
   return (
-    <FlexBox />
-    // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-    //   <View style={styles.container}>
-    //     <InputTodo addTodo={addTodo} />
-    //     <ListTodo todoList={todoList} deleteTodo={deleteTodo} />
-    //   </View>
-    // </TouchableWithoutFeedback>
+    // <FlexBox />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <InputTodo addTodo={addTodo} />
+        <ListTodo todoList={todoList} deleteTodo={deleteTodo} />
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
