@@ -3,8 +3,11 @@ import { Button, Text, View } from "react-native";
 import { NavigationContainer, useRoute } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
+import "react-native-gesture-handler";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 function HomeScreen(props: any) {
   const navigation = props.navigation;
@@ -61,7 +64,7 @@ function DetailsScreen(props: any) {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
+      {/* <Stack.Navigator
         screenOptions={{
           headerStyle: {
             backgroundColor: "#f4511e",
@@ -84,7 +87,15 @@ export default function App() {
             headerTitle: `Xem chi tiết ${props.route?.params?.userId ?? ""}`,
           })}
         />
-      </Stack.Navigator>
+      </Stack.Navigator> */}
+      <Drawer.Navigator initialRouteName="Details">
+        <Drawer.Screen
+          options={{ drawerLabel: "Trang chủ", headerTitle: "Trang chủ" }}
+          name="Home"
+          component={HomeScreen}
+        />
+        <Drawer.Screen name="Details" component={DetailsScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
