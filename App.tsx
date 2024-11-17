@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { Button, Text, View } from "react-native";
 import { NavigationContainer, useRoute } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
 import "react-native-gesture-handler";
+
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
 
 function HomeScreen(props: any) {
   const navigation = props.navigation;
@@ -88,14 +92,37 @@ export default function App() {
           })}
         />
       </Stack.Navigator> */}
-      <Drawer.Navigator initialRouteName="Details">
+      {/* <Drawer.Navigator initialRouteName="Details">
         <Drawer.Screen
           options={{ drawerLabel: "Trang chủ", headerTitle: "Trang chủ" }}
           name="Home"
           component={HomeScreen}
         />
         <Drawer.Screen name="Details" component={DetailsScreen} />
-      </Drawer.Navigator>
+      </Drawer.Navigator> */}
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === "Home") {
+              iconName = focused ? "football" : "football-outline";
+            } else if (route.name === "Settings") {
+              iconName = focused ? "aperture" : "aperture-outline";
+            }
+
+            // You can return any component that you like here!
+            return (
+              <Ionicons name={iconName as any} size={size} color={color} />
+            );
+          },
+          tabBarActiveTintColor: "tomato",
+          tabBarInactiveTintColor: "gray",
+        })}
+      >
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={DetailsScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
