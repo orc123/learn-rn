@@ -47,7 +47,6 @@ function HomeScreen(props: any) {
 function DetailsScreen(props: any) {
   const navigation: any = useNavigation();
   const route: any = useRoute();
-  console.log(route);
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Details Screen</Text>
@@ -62,9 +61,29 @@ function DetailsScreen(props: any) {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "#f4511e",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: "Trang chủ" }}
+        />
+        <Stack.Screen
+          name="Details"
+          component={DetailsScreen}
+          options={(props: any) => ({
+            headerTitle: `Xem chi tiết ${props.route?.params?.userId ?? ""}`,
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
