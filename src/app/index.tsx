@@ -1,24 +1,13 @@
-import { Button, Text, View } from "react-native";
 import { Link } from "expo-router";
-import { router } from "expo-router";
+import { Text, View } from "react-native";
 
-const AppRoot = () => {
-  const handleLogin = () => {
-    alert("login");
-    //router.navigate("/login");
-    router.navigate("/user");
-  };
+const HomePage = () => {
   return (
     <View>
-      <Text>1Hello world with Expo Router</Text>
-      <Link href={"/orc12"}>Go to Orc12</Link>
-      <Link href={"/like/like.detail"} asChild>
-        <Button title="Go to like Detail" />
-      </Link>
-      <View style={{ margin: 20 }}>
-        <Button title="Login" onPress={handleLogin} />
-      </View>
+      <Text> Welcome to HomePage</Text>
+      <Link href={"/product"}>Go to Product</Link>
+      <Link href={"/login"}>Go to login</Link>
     </View>
   );
 };
-export default AppRoot;
+export default HomePage;
