@@ -2,8 +2,9 @@ import ShareButton from "@/components/button/share,button";
 import SocialButton from "@/components/button/social.button";
 import SharedInput from "@/components/input/shared.input";
 import { APP_COLOR } from "@/utils/constant";
+import axios from "axios";
 import { Link } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,9 +18,24 @@ const styles = StyleSheet.create({
 });
 
 const SignUpPage = () => {
+  const URL_BACKEND = process.env.EXPO_PUBLIC_API_URL;
+
   const [name, setName] = useState<string>("a");
   const [email, setEmail] = useState<string>("b");
   const [password, setPassword] = useState<string>("c");
+
+  useEffect(() => {
+    const fetchAPI = async () => {
+      try {
+        const res = await axios.get(URL_BACKEND!);
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAPI();
+  }, []);
+
   return (
     <GestureHandlerRootView>
       <SafeAreaView style={{ flex: 1 }}>
