@@ -3,7 +3,8 @@ import SocialButton from "@/components/button/social.button";
 import SharedInput from "@/components/input/shared.input";
 import { APP_COLOR } from "@/utils/constant";
 import { Link } from "expo-router";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -16,6 +17,9 @@ const styles = StyleSheet.create({
 });
 
 const SignUpPage = () => {
+  const [name, setName] = useState<string>("a");
+  const [email, setEmail] = useState<string>("b");
+  const [password, setPassword] = useState<string>("c");
   return (
     <GestureHandlerRootView>
       <SafeAreaView style={{ flex: 1 }}>
@@ -31,14 +35,24 @@ const SignUpPage = () => {
               Đăng ký tài khoản
             </Text>
           </View>
-          <SharedInput title="Họ tên" />
-          <SharedInput title="Email" keyboardType="email-address" />
-          <SharedInput title="Password" />
+          <SharedInput title="Họ tên" value={name} setValue={setName} />
+          <SharedInput
+            title="Email"
+            keyboardType="email-address"
+            value={email}
+            setValue={setEmail}
+          />
+          <SharedInput
+            title="Password"
+            secureTextEntry={true}
+            value={password}
+            setValue={setPassword}
+          />
           <View style={{ marginVertical: 10 }}></View>
           <View>
             <ShareButton
               title="Đăng Ký"
-              onPress={() => alert("me")}
+              onPress={() => console.log(name, email, password)}
               textStyle={{
                 textTransform: "uppercase",
                 color: "#fff",
