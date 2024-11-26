@@ -3,7 +3,7 @@ import SocialButton from "@/components/button/social.button";
 import SharedInput from "@/components/input/shared.input";
 import { APP_COLOR } from "@/utils/constant";
 import axios from "axios";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -18,23 +18,26 @@ const styles = StyleSheet.create({
 });
 
 const SignUpPage = () => {
-  const URL_BACKEND = process.env.EXPO_PUBLIC_API_URL;
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const [name, setName] = useState<string>("a");
-  const [email, setEmail] = useState<string>("b");
-  const [password, setPassword] = useState<string>("c");
+  const handleSingUp = async () => {
+    const url = `${process.env.EXPO_PUBLIC_API_URL}/api/v1/auth/register`;
+    try {
+      const res = await axios.post(url, {
+        email,
+        password,
+        name,
+      });
 
-  useEffect(() => {
-    const fetchAPI = async () => {
-      try {
-        const res = await axios.get(URL_BACKEND!);
-        console.log(res.data);
-      } catch (error) {
-        console.log(error);
+      if (res.data) {
+        router.navigate("/(auth)/verify");
       }
-    };
-    fetchAPI();
-  }, []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <GestureHandlerRootView>
@@ -68,7 +71,7 @@ const SignUpPage = () => {
           <View>
             <ShareButton
               title="Đăng Ký"
-              onPress={() => console.log(name, email, password)}
+              onPress={() => handleSingUp()}
               textStyle={{
                 textTransform: "uppercase",
                 color: "#fff",
