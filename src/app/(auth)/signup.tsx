@@ -3,11 +3,11 @@ import SocialButton from "@/components/button/social.button";
 import SharedInput from "@/components/input/shared.input";
 import { registerAPI } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
-import axios from "axios";
 import { Link, router } from "expo-router";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Toast from "react-native-root-toast";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
@@ -30,7 +30,12 @@ const SignUpPage = () => {
       if (res.data) {
         router.navigate("/(auth)/verify");
       } else {
-        alert(res.message);
+        Toast.show(Array.isArray(res.message) ? res.message[0] : res.message, {
+          duration: Toast.durations.LONG,
+          textColor: "white",
+          backgroundColor: APP_COLOR.ORANGE,
+          opacity: 1,
+        });
       }
     } catch (error) {
       console.log(error);
