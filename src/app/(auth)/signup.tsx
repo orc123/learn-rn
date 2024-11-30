@@ -28,7 +28,10 @@ const SignUpPage = () => {
       const res = await registerAPI(email, password, name);
 
       if (res.data) {
-        router.navigate("/(auth)/verify");
+        router.navigate({
+          pathname: "/(auth)/verify",
+          params: { email: email },
+        });
       } else {
         Toast.show(Array.isArray(res.message) ? res.message[0] : res.message, {
           duration: Toast.durations.LONG,

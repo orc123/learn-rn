@@ -1,7 +1,8 @@
 import LoadingOverlay from "@/components/loading/overlay";
 import { verifyCodeAPI } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
-import { useState } from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import { useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, Keyboard } from "react-native";
 import OTPTextView from "react-native-otp-textinput";
 import Toast from "react-native-root-toast";
@@ -20,38 +21,51 @@ const styles = StyleSheet.create({
 
 const VerifyPage = () => {
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const otpRef = useRef<OTPTextView>(null);
+  const [code, setCode] = useState<string>("");
+  const { email } = useLocalSearchParams();
 
-  const handleCellTextChange = async (text: string, i: number) => {
-    if (i === 5 && text) {
-      Keyboard.dismiss();
-      setIsSubmit(true);
-      const res = await verifyCodeAPI("admin1@gmail.com", "123456");
-      setIsSubmit(false);
-      if (res.data) {
-        //success
-        alert("success");
-      } else {
-        Toast.show(Array.isArray(res.message) ? res.message[0] : res.message, {
-          duration: Toast.durations.LONG,
-          textColor: "white",
-          backgroundColor: APP_COLOR.ORANGE,
-          opacity: 1,
-        });
-      }
+  const verifyCode = async () => {
+    Keyboard.dismiss();
+    setIsSubmit(true);
+    const res = await verifyCodeAPI(email as string, code);
+    setIsSubmit(false);
+    if (res.data) {
+      //success
+      otpRef?.current?.clear();
+      Toast.show("Kích hoạt tài khoản thành công", {
+        duration: Toast.durations.LONG,
+        textColor: "white",
+        backgroundColor: APP_COLOR.ORANGE,
+        opacity: 1,
+      });
+      router.navigate("/(auth)/login");
+    } else {
+      Toast.show(Array.isArray(res.message) ? res.message[0] : res.message, {
+        duration: Toast.durations.LONG,
+        textColor: "white",
+        backgroundColor: APP_COLOR.ORANGE,
+        opacity: 1,
+      });
     }
   };
-
+  useEffect(() => {
+    if (code && code.length === 6) {
+      verifyCode();
+    }
+  }, [code]);
   return (
     <>
       <View style={styles.container}>
         <Text style={styles.heading}> Xác thực tài khoản</Text>
         <Text style={{ marginVertical: 10 }}>
-          Vui lòng nhập mã xác nhận đã được gửi tới địa chỉ hoidanit@gmail.com
+          Vui lòng nhập mã xác nhận đã được gửi tới địa chỉ {email as string}
         </Text>
         <View style={{ marginVertical: 20 }}>
           <OTPTextView
+            ref={otpRef}
+            handleTextChange={setCode}
             autoFocus
-            handleCellTextChange={handleCellTextChange}
             inputCount={6}
             inputCellLength={1}
             tintColor={APP_COLOR.ORANGE}
