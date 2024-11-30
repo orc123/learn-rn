@@ -36,9 +36,9 @@ const styles = StyleSheet.create({
 });
 
 const WelcomePage = () => {
-  // if (true) {
-  //   return <Redirect href={"/(auth)/signup"} />;
-  // }
+  if (true) {
+    return <Redirect href={"/(auth)/login"} />;
+  }
   return (
     <ImageBackground style={{ flex: 1 }} source={bg}>
       <LinearGradient

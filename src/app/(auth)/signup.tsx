@@ -107,16 +107,16 @@ const SignUpPage = () => {
                 color: "black",
               }}
             >
-              Chưa có tài khoản?
+              Đã có tài khoản?
             </Text>
-            <Link href={"/(auth)/signup"}>
+            <Link href={"/(auth)/login"}>
               <Text style={{ color: "black", textDecorationLine: "underline" }}>
                 Đăng nhập.
               </Text>
             </Link>
           </View>
 
-          <SocialButton />
+          <SocialButton title="Đăng ký với" />
         </View>
       </SafeAreaView>
     </GestureHandlerRootView>
