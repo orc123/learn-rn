@@ -21,9 +21,12 @@ const styles = StyleSheet.create({
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const handleLogin = async () => {
     try {
+      setLoading(true);
       const res = await loginAPI(email, password);
+      setLoading(false);
       if (res.data) {
         router.replace("/(tabs)");
       } else {
@@ -68,7 +71,7 @@ const LoginPage = () => {
           <View style={{ marginVertical: 10 }}></View>
           <View>
             <ShareButton
-              title="Đăng NHập"
+              title="Đăng Nhập"
               onPress={() => handleLogin()}
               textStyle={{
                 textTransform: "uppercase",
@@ -83,6 +86,7 @@ const LoginPage = () => {
                 backgroundColor: APP_COLOR.ORANGE,
               }}
               pressStyle={{ alignSelf: "stretch" }}
+              loading={loading}
             />
           </View>
 
