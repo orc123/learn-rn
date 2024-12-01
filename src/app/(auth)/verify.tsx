@@ -23,7 +23,7 @@ const VerifyPage = () => {
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const otpRef = useRef<OTPTextView>(null);
   const [code, setCode] = useState<string>("");
-  const { email } = useLocalSearchParams();
+  const { email, isLogin } = useLocalSearchParams();
 
   const verifyCode = async () => {
     Keyboard.dismiss();
@@ -39,7 +39,11 @@ const VerifyPage = () => {
         backgroundColor: APP_COLOR.ORANGE,
         opacity: 1,
       });
-      router.replace("/(auth)/login");
+      if (isLogin) {
+        router.replace("/(tabs)");
+      } else {
+        router.replace("/(auth)/login");
+      }
     } else {
       Toast.show(Array.isArray(res.message) ? res.message[0] : res.message, {
         duration: Toast.durations.LONG,

@@ -1,11 +1,13 @@
 import ShareButton from "@/components/button/share,button";
 import SocialButton from "@/components/button/social.button";
 import SharedInput from "@/components/input/shared.input";
+import { loginAPI } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Toast from "react-native-root-toast";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
@@ -19,7 +21,30 @@ const styles = StyleSheet.create({
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const handleLogin = () => {};
+  const handleLogin = async () => {
+    try {
+      const res = await loginAPI(email, password);
+      if (res.data) {
+        router.replace("/(tabs)");
+      } else {
+        Toast.show(Array.isArray(res.message) ? res.message[0] : res.message, {
+          duration: Toast.durations.LONG,
+          textColor: "white",
+          backgroundColor: APP_COLOR.ORANGE,
+          opacity: 1,
+        });
+
+        if (res.statusCode === 400) {
+          router.replace({
+            pathname: "/(auth)/verify",
+            params: { email: email, isLogin: 1 },
+          });
+        }
+      }
+    } catch (error) {
+      console.log(">>> check error: ", error);
+    }
+  };
   return (
     <GestureHandlerRootView>
       <SafeAreaView style={{ flex: 1 }}>
