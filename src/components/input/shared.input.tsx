@@ -65,7 +65,9 @@ const SharedInput = (props: IProps) => {
           value={value}
           onChangeText={onChangeText}
           onBlur={(e) => {
-            onBlur(e);
+            if (onBlur) {
+              onBlur(e);
+            }
             setIsFocus(false);
           }}
         />
