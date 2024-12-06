@@ -7,11 +7,7 @@ import { LoginSchema } from "@/utils/validate.schema";
 import { Link, router } from "expo-router";
 import { Formik } from "formik";
 import { useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
-import {
-  GestureHandlerRootView,
-  TextInput,
-} from "react-native-gesture-handler";
+import { StyleSheet, Text, View } from "react-native";
 import Toast from "react-native-root-toast";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -52,89 +48,85 @@ const LoginPage = () => {
     }
   };
   return (
-    <GestureHandlerRootView>
-      <SafeAreaView style={{ flex: 1 }}>
-        <Formik
-          initialValues={{ email: "", password: "" }}
-          onSubmit={(values) => handleLogin(values.email, values.password)}
-          validationSchema={LoginSchema}
-        >
-          {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-            <View style={styles.container}>
-              <Text
-                style={{ fontSize: 26, fontWeight: 600, marginVertical: 30 }}
-              >
-                Đăng nhập
-              </Text>
-              <SharedInput
-                title="Email"
-                keyboardType="email-address"
-                onChangeText={handleChange("email")}
-                onBlur={handleBlur("email")}
-                value={values.email}
-                error={errors.email}
-              />
-              <SharedInput
-                title="Mật khẩu"
-                secureTextEntry={true}
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                value={values.password}
-                error={errors.password}
-              />
+    <SafeAreaView style={{ flex: 1 }}>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values) => handleLogin(values.email, values.password)}
+        validationSchema={LoginSchema}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+          <View style={styles.container}>
+            <Text style={{ fontSize: 26, fontWeight: 600, marginVertical: 30 }}>
+              Đăng nhập
+            </Text>
+            <SharedInput
+              title="Email"
+              keyboardType="email-address"
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
+              value={values.email}
+              error={errors.email}
+            />
+            <SharedInput
+              title="Mật khẩu"
+              secureTextEntry={true}
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+              value={values.password}
+              error={errors.password}
+            />
 
-              <View style={{ marginVertical: 10 }}></View>
-              <View>
-                <ShareButton
-                  title="Đăng Nhập"
-                  onPress={handleSubmit as any}
-                  textStyle={{
-                    textTransform: "uppercase",
-                    color: "#fff",
-                    paddingVertical: 5,
-                  }}
-                  btnStyle={{
-                    justifyContent: "center",
-                    borderRadius: 30,
-                    marginHorizontal: 50,
-                    paddingVertical: 10,
-                    backgroundColor: APP_COLOR.ORANGE,
-                  }}
-                  pressStyle={{ alignSelf: "stretch" }}
-                  loading={loading}
-                />
-              </View>
-
-              <View
-                style={{
-                  marginVertical: 15,
-                  flexDirection: "row",
-                  gap: 10,
+            <View style={{ marginVertical: 10 }}></View>
+            <View>
+              <ShareButton
+                title="Đăng Nhập"
+                onPress={handleSubmit as any}
+                textStyle={{
+                  textTransform: "uppercase",
+                  color: "#fff",
+                  paddingVertical: 5,
+                }}
+                btnStyle={{
                   justifyContent: "center",
+                  borderRadius: 30,
+                  marginHorizontal: 50,
+                  paddingVertical: 10,
+                  backgroundColor: APP_COLOR.ORANGE,
+                }}
+                pressStyle={{ alignSelf: "stretch" }}
+                loading={loading}
+              />
+            </View>
+
+            <View
+              style={{
+                marginVertical: 15,
+                flexDirection: "row",
+                gap: 10,
+                justifyContent: "center",
+              }}
+            >
+              <Text
+                style={{
+                  color: "black",
                 }}
               >
+                Chưa có tài khoản?
+              </Text>
+              <Link href={"/(auth)/signup"}>
                 <Text
-                  style={{
-                    color: "black",
-                  }}
+                  style={{ color: "black", textDecorationLine: "underline" }}
                 >
-                  Chưa có tài khoản?
+                  Đăng ký.
                 </Text>
-                <Link href={"/(auth)/signup"}>
-                  <Text
-                    style={{ color: "black", textDecorationLine: "underline" }}
-                  >
-                    Đăng ký.
-                  </Text>
-                </Link>
-              </View>
-
-              <SocialButton title="Đăng nhập với" />
+              </Link>
             </View>
-          )}
-        </Formik>
-      </SafeAreaView>
-    </GestureHandlerRootView>
+
+            <SocialButton title="Đăng nhập với" />
+          </View>
+        )}
+      </Formik>
+    </SafeAreaView>
   );
 };
 
