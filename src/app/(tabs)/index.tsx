@@ -3,16 +3,7 @@ import CollectionHome from "@/components/home/collection.home";
 import HeaderHome from "@/components/home/header.home";
 import SearchHome from "@/components/home/search.home";
 import TopListHome from "@/components/home/top.list.home";
-import { useCurrentApp } from "@/context/app.context";
-import {
-  Button,
-  FlatList,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -55,10 +46,8 @@ const data = [
 ];
 
 const HomeTab = () => {
-  const { setTheme } = useCurrentApp();
   return (
     <>
-      <Button title="Change context" onPress={() => setTheme("theme update")} />
       <CustomFlatList
         data={data}
         style={styles.list}

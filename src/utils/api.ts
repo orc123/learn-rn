@@ -24,6 +24,11 @@ export const loginAPI = (email: string, password: string) => {
   });
 };
 
+export const getAccountAPI = () => {
+  const url = `/api/v1/auth/account`;
+  return axios.get<IBackendRes<IUserLogin>>(url);
+};
+
 export const printAsyncStorage = () => {
   AsyncStorage.getAllKeys((err, keys) => {
     AsyncStorage.multiGet(keys!, (error, stores) => {
