@@ -55,7 +55,12 @@ function BannerHome() {
       <Pagination.Basic
         progress={progress}
         data={sliders}
-        dotStyle={{ backgroundColor: "rgba(0,0,0,0.2)", borderRadius: 50 }}
+        dotStyle={{
+          height: 5,
+          width: 5,
+          backgroundColor: "rgba(0,0,0,0.2)",
+          borderRadius: 50,
+        }}
         containerStyle={{ gap: 5, marginTop: 10 }}
         onPress={onPressPagination}
       />
