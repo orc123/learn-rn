@@ -87,6 +87,7 @@ const TopListHome = () => {
         showsHorizontalScrollIndicator={false}
         directionalLockEnabled={true}
         alwaysBounceVertical={false}
+        style={{ marginVertical: 15 }}
       >
         <FlatList
           contentContainerStyle={{ alignSelf: "flex-start" }}
