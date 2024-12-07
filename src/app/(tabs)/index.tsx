@@ -3,7 +3,15 @@ import CollectionHome from "@/components/home/collection.home";
 import HeaderHome from "@/components/home/header.home";
 import SearchHome from "@/components/home/search.home";
 import TopListHome from "@/components/home/top.list.home";
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useCurrentTheme } from "@/context/app.context";
+import {
+  Button,
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
@@ -47,15 +55,19 @@ const data = [
 ];
 
 const HomeTab = () => {
+  const { setTheme } = useCurrentTheme();
   return (
-    <CustomFlatList
-      data={data}
-      style={styles.list}
-      renderItem={({ item }) => <CollectionHome name={item.name} />}
-      HeaderComponent={<HeaderHome />}
-      StickyElementComponent={<SearchHome />}
-      TopListElementComponent={<TopListHome />}
-    />
+    <>
+      <Button title="Change context" onPress={() => setTheme("theme update")} />
+      <CustomFlatList
+        data={data}
+        style={styles.list}
+        renderItem={({ item }) => <CollectionHome name={item.name} />}
+        HeaderComponent={<HeaderHome />}
+        StickyElementComponent={<SearchHome />}
+        TopListElementComponent={<TopListHome />}
+      />
+    </>
   );
 };
 
