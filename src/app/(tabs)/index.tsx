@@ -45,19 +45,19 @@ const data = [
     key: 1,
     name: "Top Quán Rating 5* tuần này",
     description: "Gợi ý quán được tín đồ ẩm thực đánh giá 5*",
-    ref: "",
+    refAPI: "top-rating",
   },
   {
     key: 2,
     name: "Quán Mới Lên Sàn",
     description: "Khám phá ngay hàng loạt quán mới cực ngon",
-    ref: "",
+    refAPI: "newcomer",
   },
   {
     key: 3,
     name: "Ăn Thỏa Thích, Freeship 0Đ",
     description: "Bánh ngọt, chân gà, bánh tráng trộn... Freeship.",
-    ref: "",
+    refAPI: "top-freeship",
   },
 ];
 
@@ -68,7 +68,11 @@ const HomeTab = () => {
         data={data}
         style={styles.list}
         renderItem={({ item }) => (
-          <CollectionHome name={item.name} description={item.description} />
+          <CollectionHome
+            name={item.name}
+            description={item.description}
+            refAPI={item.refAPI}
+          />
         )}
         HeaderComponent={<HeaderHome />}
         StickyElementComponent={<SearchHome />}

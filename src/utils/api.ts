@@ -40,3 +40,8 @@ export const printAsyncStorage = () => {
     });
   });
 };
+
+export const getTopRestaurant = (ref: string) => {
+  const url = `/api/v1/restaurants/${ref}`;
+  return axios.post<IBackendRes<ITopRestaurant[]>>(url);
+};
