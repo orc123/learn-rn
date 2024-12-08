@@ -96,7 +96,7 @@ const SectionListBasic = () => {
   };
 
   const onViewableItemsChanged = ({ viewableItems, changed }: any) => {
-    console.log("Visible items :", viewableItems[0]);
+    //console.log("Visible items :", viewableItems);
   };
 
   return (
@@ -123,7 +123,7 @@ const SectionListBasic = () => {
           )}
           renderSectionHeader={({ section: { title, index } }) => (
             <Text style={styles.header}>
-              {title} - {index} - 0{" "}
+              {title} - {index} - 0
             </Text>
           )}
         />
