@@ -60,3 +60,15 @@ export const getURLBaseBackend = () => {
 
   return backend;
 };
+
+export const processDataRestaurantMenu = (restaurant: IRestaurant | null) => {
+  if (!restaurant) return [];
+  return restaurant?.menu?.map((menu, index) => {
+    return {
+      index,
+      key: menu._id,
+      title: menu.title,
+      data: menu.menuItem,
+    };
+  });
+};
