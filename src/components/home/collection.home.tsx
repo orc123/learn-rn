@@ -78,7 +78,14 @@ const CollectionHome = (props: IProps) => {
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => {
             return (
-              <Pressable onPress={() => router.navigate("/product")}>
+              <Pressable
+                onPress={() =>
+                  router.navigate({
+                    pathname: "/product/[id]",
+                    params: { id: item._id },
+                  })
+                }
+              >
                 <View style={{ backgroundColor: "#efefef" }}>
                   <Image
                     style={{ height: 130, width: 130 }}

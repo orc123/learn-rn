@@ -1,5 +1,6 @@
 import axios from "@/utils/axios.customize";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Platform } from "react-native";
 
 export const registerAPI = (email: string, password: string, name: string) => {
   const url = `/api/v1/auth/register`;
@@ -44,4 +45,18 @@ export const printAsyncStorage = () => {
 export const getTopRestaurant = (ref: string) => {
   const url = `/api/v1/restaurants/${ref}`;
   return axios.post<IBackendRes<ITopRestaurant[]>>(url);
+};
+
+export const getRestaurantAPI = (id: string) => {
+  const url = `/api/v1/restaurants/${id}`;
+  return axios.get<IBackendRes<IRestaurant>>(url);
+};
+
+export const getURLBaseBackend = () => {
+  const backend =
+    Platform.OS === "android"
+      ? process.env.EXPO_PUBLIC_ANDROID_API_URL
+      : process.env.EXPO_PUBLIC_IOS_API_URL;
+
+  return backend;
 };

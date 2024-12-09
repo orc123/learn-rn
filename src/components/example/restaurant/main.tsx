@@ -23,6 +23,7 @@ import demo from "@/assets/demo.jpg";
 import { APP_COLOR } from "@/utils/constant";
 import StickyHeader from "./sticky.header";
 import { useRef, useState } from "react";
+import { getURLBaseBackend } from "@/utils/api";
 
 const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
 
@@ -33,7 +34,12 @@ const IMAGE_HEIGHT = 220;
 const INFO_HEIGHT = 250;
 const SLIDE_MENU_HEIGHT = 50;
 
-const RMain = () => {
+interface IProps {
+  restaurant: IRestaurant | null;
+}
+
+const RMain = (props: IProps) => {
+  const { restaurant } = props;
   const scrollY = useSharedValue(0);
 
   const sectionListRef = useRef<SectionList>(null);
@@ -240,12 +246,19 @@ const RMain = () => {
 
       {/*  Image */}
       <View style={styles.header}>
-        <Image source={demo} style={styles.headerImage} />
+        <Image
+          source={{
+            uri: `${getURLBaseBackend()}/images/restaurant/${
+              restaurant?.image
+            }`,
+          }}
+          style={styles.headerImage}
+        />
       </View>
 
       {/* Info */}
       <Animated.View style={[animatedInfoStyle]}>
-        <Info infoHeight={INFO_HEIGHT} />
+        <Info infoHeight={INFO_HEIGHT} restaurant={restaurant} />
       </Animated.View>
 
       {/* Sticky Menu */}
