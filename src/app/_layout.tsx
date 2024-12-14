@@ -34,7 +34,7 @@ const RootLayout = () => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: "transparent",
+      background: "white",
     },
   };
   return (
@@ -71,6 +71,14 @@ const RootLayout = () => {
               <Stack.Screen
                 name="product/[id]"
                 options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="product/create.modal"
+                options={{
+                  headerShown: false,
+                  animation: "fade",
+                  presentation: "transparentModal",
+                }}
               />
               <Stack.Screen
                 name="(auth)/login"

@@ -3,6 +3,7 @@ import { APP_COLOR } from "@/utils/constant";
 import { Image, Pressable, Text, View } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useCurrentApp } from "@/context/app.context";
+import { router } from "expo-router";
 
 interface IProps {
   menuItem: IMenuItem;
@@ -24,6 +25,7 @@ const ItemQuantity = (props: IProps) => {
   }
 
   const handlePressItem = (item: IMenuItem, action: "MINUS" | "PLUS") => {
+    router.navigate("/product/create.modal");
     if (restaurant?._id) {
       const total = action === "MINUS" ? -1 : 1;
       if (!cart[restaurant?._id]) {
