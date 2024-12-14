@@ -252,7 +252,7 @@ const RMain = (props: IProps) => {
         sections={processDataRestaurantMenu(restaurant)}
         renderItem={({ item, index }: { item: any; index: any }) => {
           const menuItem = item as IMenuItem;
-          return <ItemQuantity menuItem={menuItem} />;
+          return <ItemQuantity menuItem={menuItem} restaurant={restaurant} />;
         }}
         renderSectionHeader={({ section }: { section: any }) => (
           <View

@@ -1,14 +1,48 @@
 import { currencyFormatter, getURLBaseBackend } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
-import { Image, Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { useCurrentApp } from "@/context/app.context";
 
 interface IProps {
   menuItem: IMenuItem;
+  restaurant: IRestaurant | null;
 }
 
 const ItemQuantity = (props: IProps) => {
-  const { menuItem } = props;
+  const { menuItem, restaurant } = props;
+  const { cart, setCart } = useCurrentApp();
+
+  const handlePressItem = (item: IMenuItem, action: "MINUS" | "PLUS") => {
+    if (restaurant?._id) {
+      const total = action === "MINUS" ? -1 : 1;
+      if (!cart[restaurant?._id]) {
+        // Chưa tồn tại cửa hàng => khởi tạo cửa hàng
+        cart[restaurant._id] = {
+          sum: 0,
+          quantity: 0,
+          items: {},
+        };
+      }
+      // xử lý
+      cart[restaurant._id].sum =
+        cart[restaurant._id].sum + total * item.basePrice;
+      cart[restaurant._id].quantity = cart[restaurant._id].quantity + 1;
+
+      // Check sản phẩm đã từng thêm vào chưa
+      if (!cart[restaurant._id].items[item._id]) {
+        cart[restaurant._id].items[item._id] = {
+          data: menuItem,
+          quantity: 0,
+        };
+      }
+      cart[restaurant._id].items[item._id] = {
+        data: menuItem,
+        quantity: cart[restaurant._id].items[item._id].quantity + total,
+      };
+    }
+    console.log(cart);
+  };
 
   return (
     <View
@@ -45,7 +79,19 @@ const ItemQuantity = (props: IProps) => {
               gap: 3,
             }}
           >
-            <AntDesign name="minussquareo" size={24} color={APP_COLOR.ORANGE} />
+            <Pressable
+              style={({ pressed }) => ({
+                opacity: pressed === true ? 0.5 : 1,
+                alignSelf: "flex-start",
+              })}
+              onPress={() => handlePressItem(menuItem, "MINUS")}
+            >
+              <AntDesign
+                name="minussquareo"
+                size={24}
+                color={APP_COLOR.ORANGE}
+              />
+            </Pressable>
             <Text
               style={{
                 minWidth: 25,
@@ -54,7 +100,15 @@ const ItemQuantity = (props: IProps) => {
             >
               10
             </Text>
-            <AntDesign name="plussquare" size={24} color={APP_COLOR.ORANGE} />
+            <Pressable
+              style={({ pressed }) => ({
+                opacity: pressed === true ? 0.5 : 1,
+                alignSelf: "flex-start",
+              })}
+              onPress={() => handlePressItem(menuItem, "PLUS")}
+            >
+              <AntDesign name="plussquare" size={24} color={APP_COLOR.ORANGE} />
+            </Pressable>
           </View>
         </View>
       </View>
