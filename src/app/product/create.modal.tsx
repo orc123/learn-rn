@@ -12,7 +12,6 @@ const CreateModalPage = () => {
         backgroundColor: "#00000040",
       }}
     >
-      {/* Dismiss modal when pressing outside */}
       <Pressable
         style={StyleSheet.absoluteFill}
         onPress={() => router.back()}
