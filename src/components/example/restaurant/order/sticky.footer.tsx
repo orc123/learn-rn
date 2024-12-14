@@ -2,9 +2,26 @@ import { Pressable, Text, View } from "react-native";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { APP_COLOR } from "@/utils/constant";
 import { currencyFormatter } from "@/utils/api";
+import { useCurrentApp } from "@/context/app.context";
 
-const StickyFooter = () => {
-  return (
+interface IProps {
+  restaurant: IRestaurant | null;
+}
+
+const StickyFooter = (props: IProps) => {
+  const { cart, setCart } = useCurrentApp();
+  const { restaurant } = props;
+
+  const getSum = () => {
+    if (restaurant && cart[restaurant._id]) {
+      return cart[restaurant._id].sum;
+    }
+    return 0;
+  };
+
+  return getSum() === 0 ? (
+    <></>
+  ) : (
     <View
       style={{
         width: "100%",
@@ -39,7 +56,14 @@ const StickyFooter = () => {
               backgroundColor: APP_COLOR.ORANGE,
             }}
           >
-            <Text style={{ color: "white", fontSize: 9 }}>10</Text>
+            <Text style={{ color: "white", fontSize: 9 }}>
+              {restaurant &&
+                cart &&
+                cart[restaurant?._id] &&
+                cart[restaurant?._id]["quantity"] && (
+                  <Text>{cart[restaurant?._id]["quantity"]}</Text>
+                )}
+            </Text>
           </View>
           <Pressable onPress={() => alert("cart")}>
             <FontAwesome5
@@ -56,7 +80,7 @@ const StickyFooter = () => {
               fontSize: 18,
             }}
           >
-            {currencyFormatter(125000)}
+            {currencyFormatter(getSum())}
           </Text>
         </View>
       </View>

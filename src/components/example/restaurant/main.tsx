@@ -268,17 +268,15 @@ const RMain = (props: IProps) => {
           </View>
         )}
         ItemSeparatorComponent={() => (
-          <>
-            <View style={{ backgroundColor: "white", paddingHorizontal: 10 }}>
-              <View
-                style={{
-                  height: 1,
-                  backgroundColor: "#ccc",
-                  marginVertical: 5,
-                }}
-              />
-            </View>
-          </>
+          <View style={{ backgroundColor: "white", paddingHorizontal: 10 }}>
+            <View
+              style={{
+                height: 1,
+                backgroundColor: "#ccc",
+                marginVertical: 5,
+              }}
+            />
+          </View>
         )}
         viewabilityConfig={{
           viewAreaCoveragePercentThreshold: 1,
@@ -287,7 +285,7 @@ const RMain = (props: IProps) => {
         onViewableItemsChanged={onViewableItemsChanged}
         onMomentumScrollEnd={() => (blockUpdateRef.current = false)}
       />
-      <StickyFooter />
+      <StickyFooter restaurant={restaurant} />
     </View>
   );
 };
