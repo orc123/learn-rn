@@ -5,6 +5,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, Text, View } from "react-native";
+import { APP_COLOR } from "@/utils/constant";
 
 export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
   return (
@@ -45,12 +46,9 @@ const RootLayout = () => {
           <ThemeProvider value={navTheme}>
             <Stack
               screenOptions={{
-                headerStyle: {
-                  backgroundColor: "#f4511e",
-                },
-                headerTintColor: "#fff",
+                headerTintColor: APP_COLOR.ORANGE,
                 headerTitleStyle: {
-                  fontWeight: "bold",
+                  color: "black",
                 },
               }}
             >
@@ -91,6 +89,10 @@ const RootLayout = () => {
               <Stack.Screen
                 name="(auth)/login"
                 options={{ headerTitle: "Đăng nhập", headerShown: false }}
+              />
+              <Stack.Screen
+                name="product/order"
+                options={{ headerTitle: "Xác nhận đơn hàng" }}
               />
             </Stack>
           </ThemeProvider>
