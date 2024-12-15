@@ -91,7 +91,7 @@ const RootLayout = () => {
                 options={{ headerTitle: "Đăng nhập", headerShown: false }}
               />
               <Stack.Screen
-                name="product/order"
+                name="product/place.order"
                 options={{ headerTitle: "Xác nhận đơn hàng" }}
               />
             </Stack>
