@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 const UserInfo = () => {
   const { theme, appState } = useCurrentApp();
 
-  const baseImage = `${getURLBaseBackend}/images/avatar`;
+  const baseImage = `${getURLBaseBackend()}/images/avatar`;
   return (
     <View style={styles.container}>
       <View style={{ alignItems: "center", gap: 5 }}>

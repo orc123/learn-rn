@@ -95,7 +95,7 @@ const CollectionHome = (props: IProps) => {
                 <Pressable
                   onPress={() =>
                     router.navigate({
-                      pathname: "/product/[id]",
+                      pathname: "/(user)/product/[id]",
                       params: { id: item._id },
                     })
                   }

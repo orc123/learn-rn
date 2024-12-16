@@ -13,9 +13,10 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Feather from "@expo/vector-icons/Feather";
+import { router } from "expo-router";
 const AccountPage = () => {
   const { appState } = useCurrentApp();
-  const baseImage = `${getURLBaseBackend}/images/avatar`;
+  const baseImage = `${getURLBaseBackend()}/images/avatar`;
   const insets = useSafeAreaInsets();
   return (
     <View style={{ flex: 1 }}>
@@ -51,6 +52,7 @@ const AccountPage = () => {
           flexDirection: "row",
           alignItems: "center",
         }}
+        onPress={() => router.navigate("/(user)/account/info")}
       >
         <View
           style={{

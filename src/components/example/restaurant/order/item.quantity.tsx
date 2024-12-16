@@ -16,7 +16,9 @@ const ItemQuantity = (props: IProps) => {
     if (item.options.length && isModal === false) {
       router.navigate({
         pathname:
-          action === "PLUS" ? "/product/create.modal" : "/product/update.modal",
+          action === "PLUS"
+            ? "/(user)/product/create.modal"
+            : "/(user)/product/update.modal",
         params: { menuItemId: menuItem._id },
       });
     } else {
