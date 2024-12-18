@@ -9,15 +9,34 @@ import {
   Image,
   Platform,
   Pressable,
+  Alert,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Feather from "@expo/vector-icons/Feather";
 import { router } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const AccountPage = () => {
   const { appState } = useCurrentApp();
   const baseImage = `${getURLBaseBackend()}/images/avatar`;
   const insets = useSafeAreaInsets();
+
+  const handleLogout = async () => {
+    Alert.alert("Đăng xuất", "Bạn chắc chắn đăng xuất người dùng ?", [
+      {
+        text: "Hủy",
+        style: "cancel",
+      },
+      {
+        text: "Xác nhận",
+        onPress: async () => {
+          await AsyncStorage.removeItem("access_token");
+          router.replace("/(auth)/welcome");
+        },
+      },
+    ]);
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <View
@@ -152,6 +171,7 @@ const AccountPage = () => {
         }}
       >
         <Pressable
+          onPress={handleLogout}
           style={({ pressed }) => ({
             opacity: pressed === true ? 0.5 : 1,
             padding: 10,
