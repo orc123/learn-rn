@@ -54,7 +54,14 @@ const SignUpPage = () => {
         }
         validationSchema={SignUpSchema}
       >
-        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
           <View style={styles.container}>
             <View>
               <Text
@@ -73,6 +80,7 @@ const SignUpPage = () => {
               onBlur={handleBlur("name")}
               value={values.name}
               error={errors.name}
+              touched={touched.name}
             />
             <SharedInput
               title="Email"
@@ -81,6 +89,7 @@ const SignUpPage = () => {
               onBlur={handleBlur("email")}
               value={values.email}
               error={errors.email}
+              touched={touched.email}
             />
             <SharedInput
               title="Password"
@@ -89,6 +98,7 @@ const SignUpPage = () => {
               onBlur={handleBlur("password")}
               value={values.password}
               error={errors.password}
+              touched={touched.password}
             />
             <View style={{ marginVertical: 10 }}></View>
             <View>

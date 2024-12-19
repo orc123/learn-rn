@@ -59,7 +59,14 @@ const LoginPage = () => {
         onSubmit={(values) => handleLogin(values.email, values.password)}
         validationSchema={LoginSchema}
       >
-        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
           <View style={styles.container}>
             <Text style={{ fontSize: 26, fontWeight: 600, marginVertical: 30 }}>
               Đăng nhập
@@ -71,6 +78,7 @@ const LoginPage = () => {
               onBlur={handleBlur("email")}
               value={values.email}
               error={errors.email}
+              touched={touched.email}
             />
             <SharedInput
               title="Mật khẩu"
@@ -79,6 +87,7 @@ const LoginPage = () => {
               onBlur={handleBlur("password")}
               value={values.password}
               error={errors.password}
+              touched={touched.password}
             />
 
             <View style={{ marginVertical: 10 }}></View>

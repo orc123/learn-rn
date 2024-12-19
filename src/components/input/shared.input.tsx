@@ -34,6 +34,8 @@ interface IProps {
   onChangeText?: any;
   onBlur?: any;
   error?: any;
+  touched?: any;
+  editable?: boolean;
 }
 
 const SharedInput = (props: IProps) => {
@@ -48,6 +50,8 @@ const SharedInput = (props: IProps) => {
     onChangeText,
     onBlur,
     error,
+    touched,
+    editable = true,
   } = props;
 
   return (
@@ -55,6 +59,7 @@ const SharedInput = (props: IProps) => {
       {title && <Text style={styles.text}> {title}</Text>}
       <View>
         <TextInput
+          editable={editable}
           onFocus={() => setIsFocus(true)}
           style={[
             styles.input,
@@ -71,7 +76,9 @@ const SharedInput = (props: IProps) => {
             setIsFocus(false);
           }}
         />
-        {error && <Text style={{ color: "red", marginTop: 5 }}>{error}</Text>}
+        {error && touched && (
+          <Text style={{ color: "red", marginTop: 5 }}>{error}</Text>
+        )}
         {secureTextEntry && (
           <FontAwesome5
             style={styles.eye}
