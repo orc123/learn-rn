@@ -130,3 +130,13 @@ export const forgotPasswordAPI = (
   const url = `/api/v1/auth/forgot-password`;
   return axios.post<IBackendRes<IUserLogin>>(url, { code, email, password });
 };
+
+export const likeRestaurantAPI = (restaurant: string, quantity: number) => {
+  const url = `/api/v1/likes`;
+  return axios.post<IBackendRes<IUserLogin>>(url, { restaurant, quantity });
+};
+
+export const getFavoriteRestaurantAPI = () => {
+  const url = `/api/v1/likes?current=1&pageSize=10`;
+  return axios.get<IBackendRes<IRestaurant[]>>(url);
+};
