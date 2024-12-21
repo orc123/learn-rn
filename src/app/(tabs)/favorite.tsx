@@ -2,7 +2,7 @@ import { getFavoriteRestaurantAPI, getURLBaseBackend } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { Image, Pressable, Text, View } from "react-native";
+import { Image, Pressable, RefreshControl, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -10,14 +10,22 @@ const FavoritePage = () => {
   const [favoriteRestaurant, setFavoriteRestaurant] = useState<IRestaurant[]>(
     []
   );
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    const fetchRestaurants = async () => {
-      const res = await getFavoriteRestaurantAPI();
-      if (res.data) setFavoriteRestaurant(res.data);
-    };
     fetchRestaurants();
   }, []);
+
+  const fetchRestaurants = async () => {
+    const res = await getFavoriteRestaurantAPI();
+    if (res.data) setFavoriteRestaurant(res.data);
+  };
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchRestaurants();
+    setRefreshing(false);
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -32,7 +40,12 @@ const FavoritePage = () => {
         >
           <Text style={{ color: APP_COLOR.ORANGE }}>Quán ăn yêu thích</Text>
         </View>
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView
+          style={{ flex: 1 }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
           {favoriteRestaurant.map((item, index) => {
             return (
               <View key={index}>
