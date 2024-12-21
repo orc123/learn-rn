@@ -90,7 +90,17 @@ const LoginPage = () => {
               touched={touched.password}
             />
 
-            <View style={{ marginVertical: 10 }}></View>
+            <View style={{ marginVertical: 10 }}>
+              <Text
+                onPress={() => router.navigate("/(auth)/request.password")}
+                style={{
+                  textAlign: "center",
+                  color: APP_COLOR.ORANGE,
+                }}
+              >
+                Quên mật khẩu?
+              </Text>
+            </View>
             <View>
               <ShareButton
                 title="Đăng Nhập"
@@ -129,7 +139,10 @@ const LoginPage = () => {
               </Text>
               <Link href={"/(auth)/signup"}>
                 <Text
-                  style={{ color: "black", textDecorationLine: "underline" }}
+                  style={{
+                    color: APP_COLOR.ORANGE,
+                    textDecorationLine: "underline",
+                  }}
                 >
                   Đăng ký.
                 </Text>

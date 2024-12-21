@@ -102,6 +102,14 @@ const RootLayout = () => {
                 name="(user)/account/password"
                 options={{ headerTitle: "Cập nhật mật khẩu" }}
               />
+              <Stack.Screen
+                name="(auth)/request.password"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="(auth)/forgot.password"
+                options={{ headerShown: false }}
+              />
             </Stack>
           </ThemeProvider>
           {/* </SafeAreaView> */}
